@@ -3,7 +3,11 @@ import TransactionManager from '../Manager/transaction';
 
 const router = new koaRouter();
 
-router.get('/', async ctx => {
+router.get('/', ctx => {
+  ctx.body = 'HelloWorld';
+});
+
+router.get('/transactions', async ctx => {
   ctx.body = await TransactionManager.getAll();
 });
 
