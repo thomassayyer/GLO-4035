@@ -13,5 +13,5 @@ app.use(logger());
 app.use(cors());
 app.use(defaultRouter.routes());
 app.use(defaultRouter.allowedMethods());
-
+// dev: port 3000, prod: port 80  
 app.listen(3000);
