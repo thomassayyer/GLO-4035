@@ -9,7 +9,7 @@
 npm install
 
 # serve at localhost:3000
-npm dev
+npm run dev
 ```
 * YARN
 

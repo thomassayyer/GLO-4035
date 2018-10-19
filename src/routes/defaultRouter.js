@@ -11,6 +11,10 @@ router.get('/transactions', async ctx => {
   ctx.body = await TransactionManager.getAll();
 });
 
+router.delete('/transactions', async ctx => {
+  ctx.body = await TransactionManager.remove(ctx.request.body.password);
+});
+
 export {
   router,
 }
