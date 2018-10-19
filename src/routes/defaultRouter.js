@@ -11,6 +11,11 @@ router.get('/transactions', async ctx => {
   ctx.body = await TransactionManager.getAll();
 });
 
+router.post('/transactions', async ctx =>{
+  const payload = ctx.request.body;
+  ctx.body = await TransactionManager.create(payload);
+})
+
 export {
   router,
 }
