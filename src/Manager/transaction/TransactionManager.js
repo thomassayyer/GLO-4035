@@ -1,36 +1,37 @@
 import DBManager from '../Database';
+import Config from '../../config';
+
+const { db } = Config;
 
 class TransactionManager {
 
   async getAll() {
-    let client = await DBManager.getConnection();
+    const client = await DBManager.getConnection();
     //Insérer nom de la db et de la collection
-    let result = await client.db('').collection('transactions').find().toArray();
+    const result = await client.db(`${db.name}`).collection('transactions').find().toArray();
     client.close();
     return result;
-  }
-  
-  async remove(password) {
-    let client = await DBManager.getConnection();
-    try {
-      await client.db('projet').auth({
-        user: "admin",
-        pwd: password
-      });
-      const result = await client.db('projet').collection('transactions').remove();
-    } catch(e) {
-      return e;
-    }
   }
 
   async create(payload){
-    let client = await DBManager.getConnection();
+    const client = await DBManager.getConnection();
     //Insérer nom de la db et de la collection
-    let result = await client.db('test').collection('test_coll').insertOne(payload);
+    const result = await client.db(`${db.name}`).collection('transactions').insertOne(payload);
     client.close();
     return result;
   }
 
+  async remove(payload) {
+    const { password } = payload;
+    const error = { emsg:"Error bad password", status: 1};
+    if(password == db.pwd) {
+      const client = await DBManager.getConnection();
+      const result = await client.db(`${db.name}`).collection('transactions').remove();
+      client.close();
+      return result;
+    }
+    return error;
+  }
 }
 
 export default new TransactionManager();
