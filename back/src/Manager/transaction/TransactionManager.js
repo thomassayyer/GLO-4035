@@ -7,7 +7,6 @@ class TransactionManager {
 
   async getAll() {
     const client = await DBManager.getConnection();
-    //Insérer nom de la db et de la collection
     const result = await client.db(`${db.name}`).collection('transactions').find().toArray();
     client.close();
     return result;
@@ -15,7 +14,6 @@ class TransactionManager {
 
   async create(payload){
     const client = await DBManager.getConnection();
-    //Insérer nom de la db et de la collection
     const result = await client.db(`${db.name}`).collection('transactions').insertOne(payload);
     client.close();
     return result;
