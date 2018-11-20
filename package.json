@@ -1,0 +1,11 @@
+{
+  "name": "glo-4035",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/thomassayyer/glo-4035.git",
+  "author": "lyes <lyes.aici95@yahoo.fr>",
+  "license": "MIT",
+  "scripts": {
+    "start": "(cd ./back && yarn start) & (cd ./front && yarn serve)"
+  }
+}
