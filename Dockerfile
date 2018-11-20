@@ -8,11 +8,11 @@ WORKDIR /app
 
 # install and cache app dependencies
 COPY . .
-RUN yarn
-RUN yarn build
+RUN cd ./back && yarn && yarn build
+RUN cd ./front && yarn
 
 # Expose port
-EXPOSE 80
+EXPOSE 3000 8080
 
 # start app
 CMD ["yarn", "start"]
