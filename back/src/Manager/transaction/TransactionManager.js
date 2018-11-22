@@ -21,7 +21,7 @@ class TransactionManager {
 
   async remove(payload) {
     const { password } = payload;
-    const error = { emsg:"Error bad password", status: 1};
+    const error = { errormsg:"Bad password", status: 1};
     if(password == db.pwd) {
       const client = await DBManager.getConnection();
       const result = await client.db(`${db.name}`).collection('transactions').remove();
