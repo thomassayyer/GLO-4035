@@ -1,19 +1,18 @@
 import koaRouter from 'koa-router';
-import TransactionManager from '../Manager/transaction';
+import TransactionManager from '../Manager/Transaction';
+import Dispatcher from '../Dispatcher';
 
 const router = new koaRouter();
-
-router.get('/', ctx => {
-  ctx.body = 'HelloWorld';
-});
 
 router.get('/transactions', async ctx => {
   ctx.body = await TransactionManager.getAll();
 });
 
-router.post('/transactions', async ctx =>{
+router.post('/transactions', async ctx => {
   const payload = ctx.request.body;
-  ctx.body = await TransactionManager.create(payload);
+  const result = await Dispatcher.dispatch(payload);
+  if (result === 'Bad Request') ctx.status = 400;
+  else ctx.body = result;
 });
 
 router.delete('/transactions', async ctx => {
