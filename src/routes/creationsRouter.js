@@ -10,7 +10,7 @@ router.get('/creations', async ctx => {
 router.post('/creations', async ctx => {
   const payload = ctx.request.body;
   const result = await Dispatcher.filter(payload);
-  if (result === 'create') ctx.body = ''; //TODO
+  if (result === 'create') ctx.body = await Dispatcher.createCreation(payload);
   else ctx.status = 400;
 });
 
