@@ -10,7 +10,7 @@ router.get('/usages', async ctx => {
 router.post('/usages', async ctx => {
   const payload = ctx.request.body;
   const result = await Dispatcher.filter(payload);
-  if (result === 'usage') ctx.body = ''; //TODO
+  if (result === 'usage') ctx.body = await Dispatcher.createDensity(payload);
   else ctx.status = 400;
 });
 

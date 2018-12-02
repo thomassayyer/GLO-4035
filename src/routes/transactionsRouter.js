@@ -10,9 +10,9 @@ router.get('/transactions', async ctx => {
 
 router.post('/transactions', async ctx => {
   const payload = ctx.request.body;
-  const result = await Dispatcher.dispatch(payload);
-  if (result === 'Bad Request') ctx.status = 400;
-  else ctx.body = result;
+  const result = await Dispatcher.filter(payload);
+  if (result === 'transaction') ctx.body = await Dispatcher.createTransaction(payload);
+  else ctx.status = 400;
 });
 
 router.delete('/transactions', async ctx => {

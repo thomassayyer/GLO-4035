@@ -1,4 +1,7 @@
 import TransactionManager from '../Manager/Transaction';
+import CreationManager from '../Manager/Creation';
+import UsageManager from '../Manager/Usage';
+import DensityManager from '../Manager/Density';
 
 const transactionName = 'transaction';
 const creationName = 'create';
@@ -7,7 +10,8 @@ const densityName = 'density';
 const errorMsg = 'Bad Request';
 
 function itemToArray(item) {
-  return item.split(' - ');
+  const separators = [' - ', ' – ', ' — ']
+  return item.split(new RegExp(separators.join('|'), 'g'));
 }
 
 class Dispatcher {
@@ -40,9 +44,8 @@ class Dispatcher {
 
   async createTransaction(transaction) {
     const item = itemToArray(transaction.item);
-    if (item.length !== 3) return errorMsg;
     const payload = {
-      date: Date.parse(transaction.date),
+      date: new Date(transaction.date).toDateString(),
       name: item.pop(),
       category: item,
       qte: parseFloat(transaction.qte),
@@ -56,9 +59,8 @@ class Dispatcher {
 
   async createCreation(creation) {
     const item = itemToArray(creation.item);
-    if (item.length !== 3) return errorMsg;
     const payload = {
-      date: Date.parse(creation.date),
+      date: new Date(creation.date).toDateString(),
       name: item.pop(),
       category: item,
       qte: parseFloat(creation.qte),
@@ -66,14 +68,13 @@ class Dispatcher {
       job_id: parseInt(creation.job_id, 10),
       type: creationName,
     };
-    return payload;
+    return await CreationManager.create(payload);
   }
 
   async createUsage(usage) {
     const item = itemToArray(usage.item);
-    if (item.length !== 3) return errorMsg;
     const payload = {
-      date: Date.parse(usage.date),
+      date: new Date(usage.date).toDateString(),
       name: item.pop(),
       category: item,
       qte: parseFloat(usage.qte),
@@ -81,12 +82,11 @@ class Dispatcher {
       job_id: parseInt(usage.job_id, 10),
       type: usageName,
     };
-    return payload;
+    return await UsageManager.create(payload);
   }
 
   async createDensity(density) {
     const item = itemToArray(density.item);
-    if (item.length !== 3) return errorMsg;
     const payload = {
       information: density.Information,
       name: item.pop(),
@@ -94,7 +94,7 @@ class Dispatcher {
       g: density.g,
       ml: density.ml
     };
-    return payload;
+    return await DensityManager.create(payload);
   }
 
   filter(payload) {
