@@ -22,4 +22,4 @@ app.use(usagesRouter.allowedMethods());
 app.use(densitiesRouter.routes());
 app.use(densitiesRouter.allowedMethods());
 // dev: port 3000, prod: port 80  
-app.listen(80);
+app.listen(3000);
