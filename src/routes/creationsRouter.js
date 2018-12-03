@@ -1,10 +1,11 @@
 import koaRouter from 'koa-router';
 import Dispatcher from '../Dispatcher';
+import CreationManager from '../Manager/Creation';
 
 const router = new koaRouter();
 
 router.get('/creations', async ctx => {
-  //TODO
+  ctx.body =  await CreationManager.getAll();
 });
 
 router.post('/creations', async ctx => {
@@ -15,7 +16,12 @@ router.post('/creations', async ctx => {
 });
 
 router.delete('/creations', async ctx => {
-  //TODO
+  const payload = ctx.request.body;
+  const result = await CreationManager.remove(payload);
+  if(result.status === 1) {
+    ctx.status = 401;
+  }
+  ctx.body = result;
 });
 
 export {
