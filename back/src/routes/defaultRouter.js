@@ -16,7 +16,12 @@ router.post('/', async ctx => {
 });
 
 router.delete('/', async ctx => {
-  
+  const payload = ctx.request.body;
+  const result = await Dispatcher.remove(payload);
+  if(result.status === 1) {
+    ctx.status = 401;
+  }
+  ctx.body = result;
 });
 
 export {

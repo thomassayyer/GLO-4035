@@ -97,6 +97,14 @@ class Dispatcher {
     return await DensityManager.create(payload);
   }
 
+  async deleteAllCollections(payload) {
+    const result = await TransactionManager.remove(payload);
+    await CreationManager.remove(payload);
+    await UsageManager.remove(payload);
+    await DensityManager.remove(payload);
+    return result;
+  }
+
   filter(payload) {
     switch (JSON.stringify(Object.keys(payload)).toLocaleLowerCase()) {
       case JSON.stringify(Object.keys(this.transactionSchema)).toLocaleLowerCase():
