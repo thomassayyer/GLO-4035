@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@koa/cors": "2",
-    "date-fns": "^1.29.0",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",

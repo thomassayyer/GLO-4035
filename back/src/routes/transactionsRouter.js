@@ -1,7 +1,6 @@
 import koaRouter from 'koa-router';
 import TransactionManager from '../Manager/Transaction';
 import Dispatcher from '../Dispatcher';
-import { format } from 'date-fns';
 
 const router = new koaRouter();
 
