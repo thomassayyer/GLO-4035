@@ -45,7 +45,7 @@ class Dispatcher {
   async createTransaction(transaction) {
     const item = itemToArray(transaction.item);
     const payload = {
-      date: new Date(transaction.date).toDateString(),
+      date: new Date(transaction.date),
       name: item.pop(),
       category: item,
       qte: parseFloat(transaction.qte),
@@ -60,7 +60,7 @@ class Dispatcher {
   async createCreation(creation) {
     const item = itemToArray(creation.item);
     const payload = {
-      date: new Date(creation.date).toDateString(),
+      date: new Date(creation.date),
       name: item.pop(),
       category: item,
       qte: parseFloat(creation.qte),
@@ -74,7 +74,7 @@ class Dispatcher {
   async createUsage(usage) {
     const item = itemToArray(usage.item);
     const payload = {
-      date: new Date(usage.date).toDateString(),
+      date: new Date(usage.date),
       name: item.pop(),
       category: item,
       qte: parseFloat(usage.qte),
@@ -91,8 +91,8 @@ class Dispatcher {
       information: density.Information,
       name: item.pop(),
       category: item,
-      g: density.g,
-      ml: density.ml
+      g: parseFloat(density.g),
+      ml: parseFloat(density.ml)
     };
     return await DensityManager.create(payload);
   }
