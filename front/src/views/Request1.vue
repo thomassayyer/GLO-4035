@@ -1,7 +1,7 @@
 <template>
   <div class="request1">
     <div class="result">
-      Le Coût est de : {{ result.cost }}
+      Le Coût est de : {{ result.cost }} $
     </div>
   </div>
 </template>

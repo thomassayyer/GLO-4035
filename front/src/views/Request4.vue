@@ -3,6 +3,7 @@
     <div v-for="item in result" :key="item._id" class="result">
      <span>Name: {{ item.name }}</span>
      <span>stock : {{ item.stock }}</span>
+     <span>unit : {{ item.unit }}</span>
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="request2">
     <div v-for="item in result" :key="item._id" class="result">
      <span>Name: {{ item.name }}</span>
-     <span>Le coût moyen d'acquisition : {{ item.result }}</span>
+     <span>Le coût moyen d'acquisition : {{ item.result }} $</span>
     </div>
   </div>
 </template>
