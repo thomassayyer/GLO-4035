@@ -1,8 +1,14 @@
 import Config from '../config';
 import FetchApi from './FetchApi';
 
-const transactionService = new FetchApi(Config.api, '/transactions');
+const transactionTotalService = new FetchApi(Config.api, '/transactions/total');
+const transactionStockService = new FetchApi(Config.api, '/transactions/stock');
+const usagePCostService = new FetchApi(Config.api, '/usages/pcost');
+const usageUCostService = new FetchApi(Config.api, '/usages/ucost');
 
 export default {
-  transactionService,
+  transactionTotalService,
+  transactionStockService,
+  usagePCostService,
+  usageUCostService,
 };

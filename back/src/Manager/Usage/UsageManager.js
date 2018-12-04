@@ -75,7 +75,7 @@ class UsageManager {
   async getAvgCostPurchase(material, date) {
     const client = await DBManager.getConnection();
     let result = await client.db(`${db.name}`).collection('usages').aggregate([
-      { $match: { date: { $lte: date }, category: { $in: material } } },
+      { $match: { date: { $lte: date }, category: { $all: material } } },
       { $lookup: { from: "transactions", localField: "name", foreignField: "name", as: "transaction" } },
       { $unwind: "$transaction" },
       { $match: { "transaction.date": { $lte: date } } },

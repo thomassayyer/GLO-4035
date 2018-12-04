@@ -43,7 +43,7 @@ class TransactionManager {
     const client = await DBManager.getConnection();
     let result = await client.db(`${db.name}`).collection('transactions').aggregate([
       { $project: { date: { $dateToString: { format: "%d/%m/%Y", date: "$date"} }, name: 1, category: 1, qte: 1, unit: 1, total: 1, stotal: 1, tax: 1 } },
-      { $match: { date, category: { $in: material } } },
+      { $match: { date, category: { $all: material } } },
       { $group: { _id: null, cost: { $sum: "$total" } } }
     ]).next();
     client.close();
