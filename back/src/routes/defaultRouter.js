@@ -17,7 +17,7 @@ router.post('/', async ctx => {
 
 router.delete('/', async ctx => {
   const payload = ctx.request.body;
-  const result = await Dispatcher.remove(payload);
+  const result = await Dispatcher.deleteAllCollections(payload);
   if(result.status === 1) {
     ctx.status = 401;
   }
