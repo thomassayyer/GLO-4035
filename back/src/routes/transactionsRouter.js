@@ -12,7 +12,6 @@ router.get('/transactions', async ctx => {
 router.get('/transactions/total', async ctx => {
   let { date, material } = ctx.query;
   if (typeof material === "string") material = material.split(',');
-  console.log(material);
   date = format(new Date(date), 'DD/MM/YYYY');
   const result = await TransactionManager.getTotalCost(material, date);
   if (result !== null ) ctx.body = { cost: result.cost };
